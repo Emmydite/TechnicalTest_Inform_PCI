@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Inform.BLL.Models.ContactDTO>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="col-md-12">
+
+    <div style="margin-bottom:20px">
+        <a class="btn btn-success" asp-controller="Home"  asp-action="AddContact"> Add New </a>
+    </div>
+
+    <div class="card bg-white">
+
+        <div class="card-header">
+            <span>List of Contacts</span>
+        </div>
+        <div class="card-body pb-0" style="overflow-x:auto">
+            <table cellspacing="0" border="0" style="border-style:none; border-collapse:collapse" class="table table-responsive-sm table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th> LastName</th>
+                        <th> Email</th>
+                        <th> Phone Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr class="text-center"><td colspan="10" class="text-center"> Oops.!!! No Contact record.</td></tr>
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.Email</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-warning" style="padding:2px 5px" asp-action="EditContact" asp-route-id="@item.Id"> Edit Contact</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
